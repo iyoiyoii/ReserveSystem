@@ -2,7 +2,7 @@ package com.iyo.main;
 
 import com.iyo.main.methods.RoomMethods;
 import com.iyo.main.methods.SeatMethods;
-import com.iyo.main.Methods.UserMethods;
+import com.iyo.main.methods.UserMethods;
 import com.iyo.view.AdminView;
 
 public class AdminMain {
