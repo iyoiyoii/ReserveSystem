@@ -9,6 +9,7 @@ import com.iyo.view.LoginView;
 import com.iyo.view.UserView;
 
 public class SysMain {
+
     public static User user = new User();
     public static void main(String[] args) {
         LoginService loginService = new LoginService();

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyo.mapper.LoginMapper">
+    <select id="loginUser" resultType="com.iyo.pojo.User">
+        select * from user where UserName=#{UserName} and UserPassword=#{UserPassWord}
+    </select>
+    <select id="loginAdmin" resultType="com.iyo.pojo.Admin">
+        select * from admin where AdminName=#{AdminName} and AdminPassword=#{AdminPassWord}
+    </select>
+</mapper>
