@@ -2,11 +2,9 @@ package com.iyo.main.methods;
 
 import com.iyo.pojo.Room;
 import com.iyo.pojo.Seat;
-import com.iyo.pojo.User;
 import com.iyo.service.ReservationService;
 import com.iyo.service.RoomService;
 import com.iyo.service.SeatService;
-import com.iyo.service.UserService;
 import com.iyo.util.InputUtil;
 import com.iyo.util.PrintUtil;
 import com.iyo.view.AdminView;
@@ -30,7 +28,7 @@ public class RoomMethods {
             }
             AdminView.showInformWithLineTwo("座位布局");
             for (int i = 0; i < room.getRoomRow(); i++) {
-                List<Seat> seats = seatService.getRoomSeatRow(roomId,i + 1);
+                List<Seat> seats = seatService.getRoomSeatRowByIDAndRow(roomId,i + 1);
                 PrintUtil.printSeatsIDFormat(seats);
                 System.out.println();
             }
@@ -47,7 +45,7 @@ public class RoomMethods {
             }
             AdminView.showInformWithLineTwo("座位布局");
             for (int i = 0; i < room.getRoomRow(); i++) {
-                List<Seat> seats = seatService.getRoomSeatRow(room.getRoomID(),i + 1);
+                List<Seat> seats = seatService.getRoomSeatRowByIDAndRow(room.getRoomID(),i + 1);
                 PrintUtil.printSeatsRealIDFormat(seats);
                 System.out.println();
             }
@@ -63,7 +61,7 @@ public class RoomMethods {
             }
             AdminView.showInformWithLineTwo("座位布局");
             for (int i = 0; i < room.getRoomRow(); i++) {
-                List<Seat> seats = seatService.getRoomSeatRow(room.getRoomID(),i + 1);
+                List<Seat> seats = seatService.getRoomSeatRowByIDAndRow(room.getRoomID(),i + 1);
                 PrintUtil.printSeatsIDFormat(seats);
                 System.out.println();
             }

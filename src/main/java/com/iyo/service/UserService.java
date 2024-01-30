@@ -1,85 +1,51 @@
 package com.iyo.service;
 
 import com.iyo.dao.UserDao;
+import com.iyo.mapper.UserMapper;
 import com.iyo.pojo.User;
-import com.iyo.view.ViewBase;
+import com.iyo.util.MybatisUtil;
+import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
 public class UserService {
-    UserDao userDao = new UserDao();
+    SqlSession sqlSession;
+    UserMapper userMapper;
+    public UserService(){
+        sqlSession = MybatisUtil.getSqlSession();
+        userMapper = sqlSession.getMapper(UserMapper.class);
+    }
     public List<User> getUserAll(){
-        String sql = "select * from user";
-        return userDao.query(sql,User.class,null);
+        return userMapper.getUserAll();
     }
 
     public List<User> queryUserByWord(String param){
-        String sql = "select * from user where " +
-                "concat(ifnull(UserName,''),ifnull(Name,''),ifnull(Email,''),ifnull(PhoneNumber,''))" +
-                " like ?";
-        Object[] params = {
-                "%" + param + "%"
-        };
-        return userDao.query(sql,User.class,params);
+        return userMapper.queryUserByWord("%" + param + "%");
     }
 
     public User queryUserById(int userId){
-        String sql = "select * from user where UserId = ?";
-        Object[] params = {
-                userId
-        };
-        return userDao.get(sql,User.class,params);
+        return userMapper.queryUserById(userId);
     }
 
     public User queryUserByName(String UserName){
-        String sql = "select * from user where UserName = ?";
-        Object[] params = {
-           UserName
-        };
-        return userDao.get(sql,User.class,params);
+        return userMapper.queryUserByName(UserName);
     }
 
     public boolean updateUser(User user){
-        String sql = "update user set UserPassWord=?,Name=?,Email=?,PhoneNumber=? where UserId=?";
-        Object[] params = {
-                user.getUserPassWord(),
-                user.getName(),
-                user.getEmail(),
-                user.getPhoneNumber(),
-                user.getUserID()
-        };
-        return userDao.update(sql,params);
+        return userMapper.updateUser(user) > 0;
     }
 
-    public boolean updateUserSeat(User user, int SeatID){
-        String sql = "update user set CurrentReservationID=? where UserId=?";
-        Object[] params = {
-                SeatID,
-                user.getUserID()
-        };
-        return userDao.update(sql,params);
+    public boolean updateUserReservation(User user, int ReservationID){
+        return userMapper.updateUserReservation(user,ReservationID) > 0;
     }
 
     public boolean addUser(User user){
-        String sql = "insert into user(UserName,UserPassWord,Name,Email,PhoneNumber)" +
-                "values (?,?,?,?,?)";
-        Object[] params = {
-                user.getUserName(),
-                user.getUserPassWord(),
-                user.getName(),
-                user.getEmail(),
-                user.getPhoneNumber()
-        };
-        return userDao.update(sql,params);
+        return userMapper.addUser(user) > 0;
     }
 
 
 
     public boolean deleteUser(int userId){
-        String sql = "delete from user where UserID=?";
-        Object[] params = {
-                userId
-        };
-        return userDao.update(sql,params);
+        return userMapper.deleteUser(userId) > 0;
     }
 }

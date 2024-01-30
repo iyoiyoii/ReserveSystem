@@ -4,6 +4,6 @@ import com.iyo.pojo.Admin;
 import com.iyo.pojo.User;
 
 public interface LoginMapper {
-    User loginUser(User user);
-    Admin loginAdmin(Admin admin);
+    User queryUserNameAndPassWord(User user);
+    Admin queryAdminNameAndPassWord(Admin admin);
 }
