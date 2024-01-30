@@ -7,7 +7,7 @@
         select * from reservations where ReservationID=#{ReserveId}
     </select>
     <select id="getReservationByUserIdAndConfirmed" parameterType="int" resultType="com.iyo.pojo.Reservation">
-        select * from reservations where UserID=#{UserID} and IsConfirmed=0
+        select * from reservations where UserID=#{UserID} and IsConfirmed = 0
     </select>
     <select id="getReservationByUserId" parameterType="int" resultType="com.iyo.pojo.Reservation">
         select * from reservations where UserID=#{UserID}

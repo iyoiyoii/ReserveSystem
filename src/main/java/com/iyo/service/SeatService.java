@@ -26,6 +26,7 @@ public class SeatService {
         seatMapper = sqlSession.getMapper(SeatMapper.class);
         roomMapper = sqlSession.getMapper(RoomMapper.class);
         reservationMapper = sqlSession.getMapper(ReservationMapper.class);
+        roomService = new RoomService();
     }
 
 
@@ -41,7 +42,7 @@ public class SeatService {
     public void getSeatRoom(){
         boolean flag = true;
         while (flag){
-            roomMapper.getRoomAll();
+            roomService.getRoomAll();
             int roomId= InputUtil.readLineInt("请输入要查询的编号");
             Room room = roomMapper.getRoomByID(roomId);
             if (room == null){
@@ -57,7 +58,7 @@ public class SeatService {
     public void getFreeSeatRoom(){
         boolean flag = true;
         while (flag){
-            roomMapper.getRoomAll();
+            roomService.getRoomAll();
             int roomId= InputUtil.readLineInt("请输入要查询的编号");
             Room room = roomMapper.getRoomByID(roomId);
             if (room == null){
@@ -73,7 +74,7 @@ public class SeatService {
     public void addSeat(){
         boolean flag = true;
         while (flag){
-            roomMapper.getRoomAll();
+            roomService.getRoomAll();
             int roomId= InputUtil.readLineInt("请输入房间编号");
             Room room = roomMapper.getRoomByID(roomId);
             if (room == null){
@@ -89,7 +90,7 @@ public class SeatService {
             for (int i = 0; i < seatCount; i++) {
                 seat = new Seat();
                 seat.setSeatRow(seatRow);
-                seat.setRoomSeatID(room.getCapacity() + i);
+                seat.setRoomSeatID(room.getCapacity() + i + 1);
                 seat.setRoomID(roomId);
                 seat.setStatus(0);
                 if (!(seatMapper.addSeat(seat) > 0))
@@ -113,7 +114,7 @@ public class SeatService {
     public void deleteSeat(){
         boolean flag = true;
         while (flag){
-            roomMapper.getRoomAll();
+            roomService.getRoomAll();
             int roomId= InputUtil.readLineInt("请输入房间编号");
             Room room = roomMapper.getRoomByID(roomId);
             if (null == room){

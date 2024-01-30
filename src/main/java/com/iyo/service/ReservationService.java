@@ -45,10 +45,14 @@ public class ReservationService {
                 break;
             }
             roomService.getRoomSeatID(room);
-            int seatId= InputUtil.readLineInt("请输入作为编号");
+            int seatId= InputUtil.readLineInt("请输入座位编号");
             Seat seat = seatMapper.getSeatByRoomId(room,seatId);
-            if (null == seat || seat.getStatus() == 1){
+            if (null == seat){
                 UserView.showInformWithLine("你选择的编号有误，请重新选择");
+                break;
+            }
+            if(seat.getStatus() == 1){
+                UserView.showInformWithLine("你选择的编号已被预约，请重新选择");
                 break;
             }
             if (reservationMapper.addReservations(SysMain.user,seat) > 0){

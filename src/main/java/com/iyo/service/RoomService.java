@@ -79,6 +79,7 @@ public class RoomService {
         }
     }
     public void getRoomAll() {
+        sqlSession.clearCache();
         PrintUtil.printRoomFormat(roomMapper.getRoomAll());
     }
     public void updateRoomName(){

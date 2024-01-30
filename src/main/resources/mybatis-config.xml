@@ -6,7 +6,6 @@
     <properties resource="db.properties">
         <property name="username" value="root"/>
     </properties>
-
     <typeAliases>
         <package name="com.iyo.pojo"/>
     </typeAliases>
