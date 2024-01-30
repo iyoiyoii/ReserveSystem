@@ -12,15 +12,12 @@ import com.iyo.util.InputUtil;
 import com.iyo.util.PrintUtil;
 import com.iyo.view.UserView;
 
-import java.util.List;
 
 public class ReservationMethods {
     ReservationService reservationService = new ReservationService();
     RoomService roomService = new RoomService();
     SeatService seatService = new SeatService();
     UserService userService = new UserService();
-
-    SeatMethods seatMethods = new SeatMethods();
     RoomMethods roomMethods = new RoomMethods();
 
 
@@ -46,7 +43,7 @@ public class ReservationMethods {
                 break;
             }
             roomMethods.getRoomSeatID(room);
-            int seatId= InputUtil.readLineInt("请输入作为编号");
+            int seatId= InputUtil.readLineInt("请输入座位编号");
             Seat seat = seatService.getSeatByRoomId(room,seatId);
             if (null == seat || seat.getStatus() == 1){
                 UserView.showInformWithLine("你选择的编号有误，请重新选择");
@@ -55,7 +52,7 @@ public class ReservationMethods {
             if (reservationService.reserve(SysMain.user,seat)){
                 UserView.showInformWithLine("预约成功");
                 Reservation reservation = reservationService.getReservationByUserIdAndConfirmed(SysMain.user.getUserID());
-                userService.updateUserSeat(SysMain.user,reservation.getReservationID());
+                userService.updateUserReservation(SysMain.user,reservation.getReservationID());
                 seatService.updateSeatStatus(seat,1);
                 roomService.updateRoomOccupancy(room,1);
                 SysMain.user = userService.queryUserById(SysMain.user.getUserID());
@@ -81,7 +78,7 @@ public class ReservationMethods {
                 break;
             }
             if (reservationService.unReserve(reservation)){
-                userService.updateUserSeat(SysMain.user,0);
+                userService.updateUserReservation(SysMain.user,0);
                 Seat seat = seatService.getSeatById(reservation.getSeatID());
                 if (null == seat)
                     UserView.showInformWithLine("座位不存在或已删除");

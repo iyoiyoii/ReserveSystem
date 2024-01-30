@@ -5,7 +5,6 @@ import com.iyo.pojo.Seat;
 import com.iyo.service.ReservationService;
 import com.iyo.service.RoomService;
 import com.iyo.service.SeatService;
-import com.iyo.service.UserService;
 import com.iyo.util.InputUtil;
 import com.iyo.util.PrintUtil;
 import com.iyo.view.AdminView;
@@ -32,7 +31,7 @@ public class SeatMethods {
     public void getSeatRoom(){
         boolean flag = true;
         while (flag){
-            roomService.getRoomAll();
+            roomMethods.getRoomAll();
             int roomId= InputUtil.readLineInt("请输入要查询的编号");
             Room room = roomService.getRoomByID(roomId);
             if (room == null){
@@ -48,7 +47,7 @@ public class SeatMethods {
     public void getFreeSeatRoom(){
         boolean flag = true;
         while (flag){
-            roomService.getRoomAll();
+            roomMethods.getRoomAll();
             int roomId= InputUtil.readLineInt("请输入要查询的编号");
             Room room = roomService.getRoomByID(roomId);
             if (room == null){
@@ -64,7 +63,7 @@ public class SeatMethods {
     public void addSeat(){
         boolean flag = true;
         while (flag){
-            roomService.getRoomAll();
+            roomMethods.getRoomAll();
             int roomId= InputUtil.readLineInt("请输入房间编号");
             Room room = roomService.getRoomByID(roomId);
             if (room == null){
@@ -104,7 +103,7 @@ public class SeatMethods {
     public void deleteSeat(){
         boolean flag = true;
         while (flag){
-            roomService.getRoomAll();
+            roomMethods.getRoomAll();
             int roomId= InputUtil.readLineInt("请输入房间编号");
             Room room = roomService.getRoomByID(roomId);
             if (null == room){
@@ -129,7 +128,7 @@ public class SeatMethods {
 
     public int getRoomRow(Room room){
         int max;
-        List<Seat> seats = seatService.getRoomSeatRow(room);
+        List<Seat> seats = seatService.getRoomSeatRowByRoom(room);
         List<Integer> rows = new ArrayList<>();
         rows.add(0);
         for (Seat seat : seats) {

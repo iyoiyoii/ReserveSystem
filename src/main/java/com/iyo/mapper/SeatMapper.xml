@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyo.mapper.SeatMapper">
+    <select id="getSeatByRoomId" resultType="com.iyo.pojo.Seat">
+        select * from seat where RoomID = #{Room.RoomID} and RoomSeatID= #{SeatId}
+    </select>
+    <select id="getSeatById" resultType="com.iyo.pojo.Seat">
+        select * from seat where SeatID=#{SeatId}
+    </select>
+    <select id="getRoomSeat" resultType="com.iyo.pojo.Seat">
+        select * from seat where RoomID = #{RoomId}
+    </select>
+    <select id="getRoomFreeSeat" resultType="com.iyo.pojo.Seat">
+        select * from seat where RoomID = #{RoomId} and Status=0
+    </select>
+    <select id="getRoomSeatRowByIDAndRow" resultType="com.iyo.pojo.Seat">
+        select * from seat where RoomID=#{RoomID} and SeatRow=#{Row}
+    </select>
+    <select id="getSeatStatusAll" resultType="com.iyo.pojo.Seat">
+        select * from seat left join reservations on (reservations.SeatID = seat.SeatID)
+    </select>
+    <select id="getSeatAll" resultType="com.iyo.pojo.Seat">
+        select * from seat
+    </select>
+    <select id="getFreeSeat" resultType="com.iyo.pojo.Seat">
+        select * from seat where Status=0
+    </select>
+    <select id="getRoomSeatRowByRoom" resultType="com.iyo.pojo.Seat">
+        select * from seat where Status=0
+    </select>
+    <select id="getSeatByID" resultType="com.iyo.pojo.Seat">
+        select * from seat where Status=0
+    </select>
+    <insert id="addSeat" parameterType="com.iyo.pojo.Room">
+        insert into seat(RoomID,RoomSeatID,SeatRow,Status)
+        values (#{RoomID},#{RoomSeatID},#{SeatRow},#{Status})
+    </insert>
+    <delete id="deleteSeat" parameterType="int">
+        delete from seat where SeatID = #{seatID}
+    </delete>
+    <update id="updateSeatStatus" parameterType="com.iyo.pojo.Room">
+        update seat set Status=#{Status} where SeatID=#{Seat.SeatID}
+    </update>
+</mapper>
