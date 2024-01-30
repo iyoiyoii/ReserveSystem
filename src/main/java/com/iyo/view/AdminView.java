@@ -1,14 +1,10 @@
 package com.iyo.view;
 
 import com.iyo.pojo.Room;
-import com.iyo.pojo.Seat;
 import com.iyo.pojo.User;
 import com.iyo.util.InputUtil;
 import com.iyo.util.PrintUtil;
 import com.iyo.util.ValidationUtil;
-
-import java.security.PublicKey;
-import java.util.List;
 
 public class AdminView extends ViewBase{
     public static int displayHello() {
@@ -84,7 +80,7 @@ public class AdminView extends ViewBase{
 
     public static Room addRoomView(){
         Room room = new Room();
-        String roomName = InputUtil.readLineString("请输入自习室名:");
+        String roomName = ValidationUtil.readLineString("请输入自习室名:",ValidationUtil.ROOMNAME,"请输入16位以内包含汉字数字字母下划线");
         room.setRoomName(roomName);
         room.setCapacity(0);
         room.setCurrentOccupancy(0);
@@ -102,32 +98,32 @@ public class AdminView extends ViewBase{
 
     public static User displayUserAddView(){
         User user = new User();
-        String userName = InputUtil.readLineString("请输入用户名:");
+        String userName = ValidationUtil.readLineString("请输入用户名:",ValidationUtil.USERNAME,"请输入20位以内包含数字字母下划线");
         user.setUserName(userName);
-        String userPassWord = InputUtil.readLineString("请输入用户密码:");
+        String userPassWord = ValidationUtil.readLineString("请输入用户密码:",ValidationUtil.USERPASSWORD,"请输入20位以内包含数字字母下划线或点");
         user.setUserPassWord(userPassWord);
-        String name = InputUtil.readLineString("请输入用户昵称:");
+        String name = ValidationUtil.readLineString("请输入用户昵称:",ValidationUtil.NAME,"请输入12位以内包含汉字数字字母下划线");
         user.setName(name);
-        String eMail = InputUtil.readLineString("请输入用户邮箱:");
+        String eMail = ValidationUtil.readLineString("请输入用户邮箱:",ValidationUtil.EMAIL,"请输入正确的邮箱格式");
         user.setEmail(eMail);
-        long phoneNumber = InputUtil.readLineLong("请输入用户手机号码:");
+        long phoneNumber = ValidationUtil.readLineLong("请输入用户手机号码:",ValidationUtil.PHONENUMBER,"请输入正确的手机号码格式");
         user.setPhoneNumber(phoneNumber);
         return user;
     }
     public static User displayUserUpdateView(User user){
-        String userPassWord = InputUtil.readLineString("请输入用户密码:");
+        String userPassWord = ValidationUtil.readLineString("请输入用户密码:",ValidationUtil.USERPASSWORD,"请输入20位以内包含数字字母下划线或点");
         user.setUserPassWord(userPassWord);
-        String name = InputUtil.readLineString("请输入用户昵称:");
+        String name = ValidationUtil.readLineString("请输入用户昵称:",ValidationUtil.NAME,"请输入12位以内包含汉字数字字母下划线");
         user.setName(name);
-        String eMail = InputUtil.readLineString("请输入用户邮箱:");
+        String eMail = ValidationUtil.readLineString("请输入用户邮箱:",ValidationUtil.EMAIL,"请输入正确的邮箱格式");
         user.setEmail(eMail);
-        long phoneNumber = InputUtil.readLineLong("请输入用户手机号码:");
+        long phoneNumber = ValidationUtil.readLineLong("请输入用户手机号码:",ValidationUtil.PHONENUMBER,"请输入正确的手机号码格式");
         user.setPhoneNumber(phoneNumber);
         return user;
     }
 
     public static Room displayRoomUpdateView(Room room){
-        String roomName = InputUtil.readLineString("请输入自习室名:");
+        String roomName = ValidationUtil.readLineString("请输入自习室名:",ValidationUtil.ROOMNAME,"请输入16位以内包含汉字数字字母下划线");
         room.setRoomName(roomName);
         return room;
     }
@@ -138,22 +134,22 @@ public class AdminView extends ViewBase{
             int select = displayUserUpdateTips();
             switch (select) {
                 case 1:
-                    String userPassWord = InputUtil.readLineString("请输入用户密码:");
+                    String userPassWord = ValidationUtil.readLineString("请输入用户密码:",ValidationUtil.USERPASSWORD,"请输入20位以内包含数字字母下划线或点");
                     user.setUserPassWord(userPassWord);
                     flag = false;
                     break;
                 case 2:
-                    String name = InputUtil.readLineString("请输入用户昵称:");
+                    String name = ValidationUtil.readLineString("请输入用户昵称:",ValidationUtil.NAME,"请输入12位以内包含汉字数字字母下划线");
                     user.setName(name);
                     flag = false;
                     break;
                 case 3:
-                    String eMail = InputUtil.readLineString("请输入用户邮箱:");
+                    String eMail = ValidationUtil.readLineString("请输入用户邮箱:",ValidationUtil.EMAIL,"请输入正确的邮箱格式");
                     user.setEmail(eMail);
                     flag = false;
                     break;
                 case 4:
-                    long phoneNumber = InputUtil.readLineLong("请输入用户手机号码:");
+                    long phoneNumber = ValidationUtil.readLineLong("请输入用户手机号码:",ValidationUtil.PHONENUMBER,"请输入正确的手机号码格式");
                     user.setPhoneNumber(phoneNumber);
                     flag = false;
                     break;
