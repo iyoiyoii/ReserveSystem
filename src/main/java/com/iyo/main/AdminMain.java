@@ -1,14 +1,14 @@
 package com.iyo.main;
 
-import com.iyo.main.methods.RoomMethods;
-import com.iyo.main.methods.SeatMethods;
-import com.iyo.main.methods.UserMethods;
+import com.iyo.service.RoomService;
+import com.iyo.service.SeatService;
+import com.iyo.service.UserService;
 import com.iyo.view.AdminView;
 
 public class AdminMain {
-    RoomMethods roomMethods = new RoomMethods();
-    SeatMethods seatMethods = new SeatMethods();
-    UserMethods userMethods = new UserMethods();
+    RoomService roomService = new RoomService();
+    SeatService seatService = new SeatService();
+    UserService userService = new UserService();
 
     public void UserManager(){
         boolean flag = true;
@@ -22,15 +22,15 @@ public class AdminMain {
                         switch (selectS){
                             case 1:
                                 AdminView.showInformWithLineTwo("查询所有用户信息");
-                                userMethods.getUserAll();
+                                userService.getUserAll();
                                 break;
                             case 2:
                                 AdminView.showInformWithLineTwo("模糊查询用户信息");
-                                userMethods.queryUserByWord();
+                                userService.queryUserByWord();
                                 break;
                             case 3:
                                 AdminView.showInformWithLineTwo("查询用户预约信息");
-                                userMethods.queryUserReservationById();
+                                userService.queryUserReservationById();
                                 break;
                             case 0:
                                 AdminView.showInformWithLineTwo("返回");
@@ -48,19 +48,19 @@ public class AdminMain {
                     switch (selectC){
                         case 1:
                             AdminView.showInformWithLineTwo("修改用户信息");
-                            userMethods.updateUser();
+                            userService.updateUser();
                             break;
                         case 2:
                             AdminView.showInformWithLineTwo("修改指定用户信息");
-                            userMethods.updateUserPart();
+                            userService.updateUserPart();
                             break;
                         case 3:
                             AdminView.showInformWithLineTwo("新增用户");
-                            userMethods.addUser();
+                            userService.addUser();
                             break;
                         case 4:
                             AdminView.showInformWithLineTwo("删除用户");
-                            userMethods.deleteUser();
+                            userService.deleteUser();
                             break;
                         case 0:
                             AdminView.showInformWithLineTwo("返回");
@@ -93,15 +93,15 @@ public class AdminMain {
                         switch (selectS){
                             case 1:
                                 AdminView.showInformWithLineTwo("查询自习室状态");
-                                roomMethods.getRoomAll();
+                                roomService.getRoomAll();
                                 break;
                             case 2:
                                 AdminView.showInformWithLineTwo("查询自习室座位布局");
-                                roomMethods.getRoomSeat();
+                                roomService.getRoomSeat();
                                 break;
                             case 3:
                                 AdminView.showInformWithLineTwo("查询自习室预约信息");
-                                roomMethods.queryRoomReservationById();
+                                roomService.queryRoomReservationById();
                                 break;
                             case 0:
                                 AdminView.showInformWithLineTwo("返回");
@@ -119,15 +119,15 @@ public class AdminMain {
                     switch (selectC){
                         case 1:
                             AdminView.showInformWithLineTwo("修改自习室名称");
-                            roomMethods.updateRoomName();
+                            roomService.updateRoomName();
                             break;
                         case 2:
                             AdminView.showInformWithLineTwo("添加自习室");
-                            roomMethods.addRoom();
+                            roomService.addRoom();
                             break;
                         case 3:
                             AdminView.showInformWithLineTwo("删除自习室");
-                            roomMethods.deleteRoom();
+                            roomService.deleteRoom();
                             break;
                         case 0:
                             AdminView.showInformWithLineTwo("返回");
@@ -160,27 +160,27 @@ public class AdminMain {
                         switch (selectS){
                             case 1:
                                 AdminView.showInformWithLineTwo("查询所有座位");
-                                seatMethods.getSeatAll();
+                                seatService.getSeatAll();
                                 break;
                             case 2:
                                 AdminView.showInformWithLineTwo("查询空余座位");
-                                seatMethods.getFreeSeat();
+                                seatService.getFreeSeat();
                                 break;
                             case 3:
                                 AdminView.showInformWithLineTwo("查询房间座位");
-                                seatMethods.getSeatRoom();
+                                seatService.getSeatRoom();
                                 break;
                             case 4:
                                 AdminView.showInformWithLineTwo("查询房间空余座位");
-                                seatMethods.getFreeSeatRoom();
+                                seatService.getFreeSeatRoom();
                                 break;
                             case 5:
                                 AdminView.showInformWithLineTwo("查询所有座位状态");
-                                seatMethods.getSeatAllStatus();
+                                seatService.getSeatAllStatus();
                                 break;
                             case 6:
                                 AdminView.showInformWithLineTwo("查询座位预约信息");
-                                seatMethods.querySeatReservationById();
+                                seatService.querySeatReservationById();
                                 break;
 
                             case 0:
@@ -199,11 +199,11 @@ public class AdminMain {
                     switch (selectC){
                         case 1:
                             AdminView.showInformWithLineTwo("添加座位");
-                            seatMethods.addSeat();
+                            seatService.addSeat();
                             break;
                         case 2:
                             AdminView.showInformWithLineTwo("删除座位");
-                            seatMethods.deleteSeat();
+                            seatService.deleteSeat();
                             break;
                         case 0:
                             AdminView.showInformWithLineTwo("返回");

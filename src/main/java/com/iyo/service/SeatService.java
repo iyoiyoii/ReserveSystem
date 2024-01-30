@@ -1,72 +1,166 @@
 package com.iyo.service;
 
+import com.iyo.mapper.ReservationMapper;
+import com.iyo.mapper.RoomMapper;
 import com.iyo.mapper.SeatMapper;
 import com.iyo.pojo.Room;
 import com.iyo.pojo.Seat;
+import com.iyo.util.InputUtil;
+import com.iyo.util.PrintUtil;
 import com.iyo.util.SqlSessionUtil;
+import com.iyo.view.AdminView;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SeatService {
     SqlSession sqlSession;
     SeatMapper seatMapper;
+    RoomMapper roomMapper;
+    ReservationMapper reservationMapper;
+    RoomService roomService;
     public SeatService(){
         sqlSession = SqlSessionUtil.getSqlSession();
         seatMapper = sqlSession.getMapper(SeatMapper.class);
-    }
-
-    public Seat getSeatByRoomId(Room room,int SeatId){
-        return seatMapper.getSeatByRoomId(room,SeatId);
-
-    }
-
-    public Seat getSeatById(int SeatId){
-        return seatMapper.getSeatById(SeatId);
+        roomMapper = sqlSession.getMapper(RoomMapper.class);
+        reservationMapper = sqlSession.getMapper(ReservationMapper.class);
     }
 
 
-    public List<Seat> getRoomSeat(int RoomID){
-        return seatMapper.getRoomSeat(RoomID);
+    public void getSeatAll(){
+        PrintUtil.printSeatsFormat(seatMapper.getSeatAll());
+    }
+    public void getFreeSeat(){
+        PrintUtil.printSeatsFormat(seatMapper.getFreeSeat());
+    }
+    public void getSeatAllStatus() {
+        PrintUtil.printSeatStatusFormat(seatMapper.getSeatStatusAll());
+    }
+    public void getSeatRoom(){
+        boolean flag = true;
+        while (flag){
+            roomMapper.getRoomAll();
+            int roomId= InputUtil.readLineInt("请输入要查询的编号");
+            Room room = roomMapper.getRoomByID(roomId);
+            if (room == null){
+                AdminView.showInformWithLine("你选择的编号有误，请重新选择");
+                break;
+            }
+            PrintUtil.printSeatsFormat(seatMapper.getRoomSeat(room.getRoomID()));
+            if (AdminView.displayContinue()==2)
+                flag = false;
+        }
     }
 
-    public List<Seat> getRoomFreeSeat(int RoomID){
-        return seatMapper.getRoomFreeSeat(RoomID);
+    public void getFreeSeatRoom(){
+        boolean flag = true;
+        while (flag){
+            roomMapper.getRoomAll();
+            int roomId= InputUtil.readLineInt("请输入要查询的编号");
+            Room room = roomMapper.getRoomByID(roomId);
+            if (room == null){
+                AdminView.showInformWithLine("你选择的编号有误，请重新选择");
+                break;
+            }
+            PrintUtil.printSeatsFormat(seatMapper.getRoomFreeSeat(room.getRoomID()));
+            if (AdminView.displayContinue()==2)
+                flag = false;
+        }
     }
 
+    public void addSeat(){
+        boolean flag = true;
+        while (flag){
+            roomMapper.getRoomAll();
+            int roomId= InputUtil.readLineInt("请输入房间编号");
+            Room room = roomMapper.getRoomByID(roomId);
+            if (room == null){
+                AdminView.showInformWithLine("你选择的编号有误，请重新选择");
+                break;
+            }
+            PrintUtil.printRoomFormat(room);
+            int seatRow = InputUtil.readLineInt("请输入房间行号");
+            int seatCount = InputUtil.readLineInt("请输入要新增的座位数");
+            Seat seat;
 
-    public List<Seat> getRoomSeatRowByIDAndRow(int RoomID,int Row){
-        return seatMapper.getRoomSeatRowByIDAndRow(RoomID,Row);
+            boolean bool = true;
+            for (int i = 0; i < seatCount; i++) {
+                seat = new Seat();
+                seat.setSeatRow(seatRow);
+                seat.setRoomSeatID(room.getCapacity() + i);
+                seat.setRoomID(roomId);
+                seat.setStatus(0);
+                if (!(seatMapper.addSeat(seat) > 0))
+                    bool = false;
+            }
+            if (bool){
+                AdminView.showInformWithLine("新增成功");
+                room.setCapacity(room.getCapacity() + seatCount);
+                if(room.getRoomRow() < seatRow)
+                    room.setRoomRow(seatRow);
+                roomMapper.updateRoom(room);
+            }
+            else{
+                AdminView.showInformWithLine("新增失败");
+                // RollBack不会写先空着
+            }
+            if (AdminView.displayContinue()==2)
+                flag = false;
+        }
+    }
+    public void deleteSeat(){
+        boolean flag = true;
+        while (flag){
+            roomMapper.getRoomAll();
+            int roomId= InputUtil.readLineInt("请输入房间编号");
+            Room room = roomMapper.getRoomByID(roomId);
+            if (null == room){
+                AdminView.showInformWithLine("你选择的编号有误，请重新选择");
+                break;
+            }
+            roomService.getRoomSeatRealID(room);
+            int seatId = InputUtil.readLineInt("请输入要删除的座位号");
+            if (seatMapper.deleteSeat(seatId) > 0){
+                AdminView.showInformWithLine("删除成功");
+                room.setCapacity(room.getCapacity() - 1);
+                room.setRoomRow(getRoomRow(room));
+                roomMapper.updateRoom(room);
+            }
+            else{
+                AdminView.showInformWithLine("删除失败");
+            }
+            if (AdminView.displayContinue()==2)
+                flag = false;
+        }
     }
 
-    public List<Seat> getSeatStatusAll(){
-        return seatMapper.getSeatStatusAll();
+    public int getRoomRow(Room room){
+        int max = 0;
+        List<Seat> seats = seatMapper.getRoomSeatRowByRoom(room);
+        List<Integer> rows = new ArrayList<Integer>();
+        rows.add(0);
+        for (Seat seat : seats) {
+            rows.add(seat.getSeatRow());
+        }
+        max = Collections.max(rows);
+        return max;
     }
 
-
-    public List<Seat> getSeatAll(){
-        return seatMapper.getSeatAll();
-    }
-
-    public List<Seat> getFreeSeat(){
-        return seatMapper.getFreeSeat();
-    }
-    public List<Seat> getRoomSeatRowByRoom(Room room){
-        return seatMapper.getRoomSeatRowByRoom(room);
-    }
-
-    public Seat getSeatByID(int seatId) {
-        return getSeatById(seatId);
-    }
-    public boolean addSeat(Seat seat){
-        return seatMapper.addSeat(seat) > 0;
-    }
-
-    public boolean deleteSeat(int seatID){
-        return seatMapper.deleteSeat(seatID) > 0;
-    }
-
-    public boolean updateSeatStatus(Seat seat,int Status){
-        return seatMapper.updateSeatStatus(seat,Status) > 0;
+    public void querySeatReservationById() {
+        boolean flag = true;
+        while (flag){
+            getSeatAll();
+            int seatId = InputUtil.readLineInt("请输入要查询的座位ID:");
+            Seat seat = seatMapper.getSeatByID(seatId);
+            if(null == seat){
+                AdminView.showInformWithLine("你选择的编号有误，请重新选择");
+                break;
+            }
+            PrintUtil.printReservationsFormat(reservationMapper.getReservationBySeatId(seat.getSeatID()));
+            if (AdminView.displayContinue()==2)
+                flag = false;
+        }
     }
 }
