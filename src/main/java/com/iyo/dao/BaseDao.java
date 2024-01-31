@@ -7,7 +7,6 @@ import com.iyo.util.ExceptionUtil;
 import org.apache.commons.dbutils.*;
 import org.apache.commons.dbutils.handlers.*;
 public class BaseDao<T> {
-
     private static final String URL = "jdbc:mysql://localhost:3306/zxs?characterEncoding=UTF-8&serverTimezone=UTC&useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String USER = "root";
