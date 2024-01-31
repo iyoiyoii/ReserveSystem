@@ -124,6 +124,12 @@ public class SeatService {
             }
             roomService.getRoomSeatRealID(room);
             int seatId = InputUtil.readLineInt("请输入要删除的座位号");
+            Seat seat = seatMapper.getSeatById(seatId);
+            if (seat.getStatus() == 1){
+                AdminView.showInformWithLine("要删除的座位仍存在预约，请督促签离后再删除");
+                flag = false;
+                break;
+            }
             if (seatMapper.deleteSeat(seatId) > 0){
                 AdminView.showInformWithLine("删除成功");
                 room.setCapacity(room.getCapacity() - 1);
@@ -155,7 +161,7 @@ public class SeatService {
         while (flag){
             getSeatAll();
             int seatId = InputUtil.readLineInt("请输入要查询的座位ID:");
-            Seat seat = seatMapper.getSeatByID(seatId);
+            Seat seat = seatMapper.getSeatById(seatId);
             if(null == seat){
                 AdminView.showInformWithLine("你选择的编号有误，请重新选择");
                 break;

@@ -30,8 +30,8 @@
     <select id="getRoomSeatRowByRoom" resultType="com.iyo.pojo.Seat">
         select * from seat where Status=0
     </select>
-    <select id="getSeatByID" resultType="com.iyo.pojo.Seat">
-        select * from seat where Status=0
+    <select id="getSeatFreeByID" resultType="com.iyo.pojo.Seat">
+        select * from seat where Status=0 and SeatID = #{seatID}
     </select>
     <insert id="addSeat" parameterType="com.iyo.pojo.Room">
         insert into seat(RoomID,RoomSeatID,SeatRow,Status)

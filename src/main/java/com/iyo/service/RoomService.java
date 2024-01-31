@@ -118,6 +118,12 @@ public class RoomService {
         while (flag){
             getRoomAll();
             int roomId = InputUtil.readLineInt("请输入要删除的房间号:");
+            Room room = roomMapper.getRoomByID(roomId);
+            if (room.getCurrentOccupancy()>0){
+                AdminView.showInformWithLine("要删除的房间仍存在预约，请督促签离后再删除");
+                flag = false;
+                break;
+            }
             if(roomMapper.deleteRoom(roomId) > 0){
                 AdminView.showInformWithLine("删除成功");
             }else{

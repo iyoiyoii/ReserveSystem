@@ -108,6 +108,12 @@ public class UserService {
         while (flag){
             getUserAll();
             int userId = InputUtil.readLineInt("请输入要删除的用户ID:");
+            User user = userMapper.queryUserById(userId);
+            if (user.getCurrentReservationID() != 0){
+                AdminView.showInformWithLine("要删除的用户仍存在预约，请督促签离后再删除");
+                flag = false;
+                break;
+            }
             if(userMapper.deleteUser(userId) > 0){
                 AdminView.showInformWithLine("删除成功");
             }else{

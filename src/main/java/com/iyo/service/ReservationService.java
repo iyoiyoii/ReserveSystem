@@ -85,7 +85,7 @@ public class ReservationService {
             }
             if (reservationMapper.deleteReservations(reservation) > 0){
                 userMapper.updateUserReservation(SysMain.user,0);
-                Seat seat = seatMapper.getSeatById(reservation.getSeatID());
+                Seat seat = seatMapper.getSeatFreeByID(reservation.getSeatID());
                 if (null == seat)
                     UserView.showInformWithLine("座位不存在或已删除");
                 else
