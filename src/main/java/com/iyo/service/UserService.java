@@ -4,20 +4,17 @@ import com.iyo.mapper.ReservationMapper;
 import com.iyo.mapper.UserMapper;
 import com.iyo.pojo.User;
 import com.iyo.util.InputUtil;
-import com.iyo.util.MybatisUtil;
 import com.iyo.util.PrintUtil;
+import com.iyo.util.SqlSessionUtil;
 import com.iyo.view.AdminView;
 import org.apache.ibatis.session.SqlSession;
 
 public class UserService {
-    ReservationService reservationMethods = new ReservationService();
-    ReservationService reservationService = new ReservationService();
-
     SqlSession sqlSession;
     UserMapper userMapper;
     ReservationMapper reservationMapper;
     public UserService(){
-        sqlSession = MybatisUtil.getSqlSession();
+        sqlSession = SqlSessionUtil.getSqlSession();
         userMapper = sqlSession.getMapper(UserMapper.class);
         reservationMapper =sqlSession.getMapper(ReservationMapper.class);
     }
@@ -31,6 +28,7 @@ public class UserService {
         PrintUtil.printUserFormat(userMapper.getUserAll());
     }
     public void queryUserByWord(){
+        sqlSession.clearCache();
         String queryWord = InputUtil.readLineString("请输入查询词:");
         PrintUtil.printUserFormat(userMapper.queryUserByWord(queryWord));
     }

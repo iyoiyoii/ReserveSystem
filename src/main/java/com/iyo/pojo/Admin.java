@@ -6,8 +6,6 @@ public class Admin {
 
     private String AdminPassWord;
 
-    private String AdminRights;
-
     public Admin(String AdminName,String AdminPassWord){
         this.AdminName = AdminName;
         this.AdminPassWord = AdminPassWord;
@@ -38,14 +36,4 @@ public class Admin {
     public void setAdminPassWord(String adminPassWord) {
         AdminPassWord = adminPassWord;
     }
-
-    public String getAdminRights() {
-        return AdminRights;
-    }
-
-    public void setAdminRights(String adminRights) {
-        AdminRights = adminRights;
-    }
-
-
 }

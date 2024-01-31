@@ -60,6 +60,8 @@ public class Room {
 
     @Override
     public String toString() {
-        return getRoomName();
+        return RoomID + ("\t\t\t") + RoomName + ("\t\t\t")
+                + RoomRow + ("\t\t\t")
+                + CurrentOccupancy + "/" + Capacity;
     }
 }

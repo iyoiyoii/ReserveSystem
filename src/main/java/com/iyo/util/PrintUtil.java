@@ -18,14 +18,10 @@ public class PrintUtil {
         printLine();
         if (null == users)
             return;
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(format(10,"编号"));
-        stringBuffer.append(format(16,"用户名"));
-        stringBuffer.append(format(16,"姓名"));
-        stringBuffer.append(format(20,"邮箱"));
-        stringBuffer.append(format(15,"手机号码"));
-        stringBuffer.append(format(10,"预约状态"));
-        System.out.println(stringBuffer);
+        String str = "用户编号" + ("\t") + "用户名" + ("\t\t\t")
+                + "姓名"  + ("\t\t\t\t") + "邮箱"  + ("\t\t\t\t")
+                + "手机号码"  + ("\t\t") + "预约状态";
+        System.out.println(str);
         for (User user : users) {
             System.out.println(user);
         }
@@ -35,14 +31,10 @@ public class PrintUtil {
         printLine();
         if (null == user)
             return;
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(format(10,"编号"));
-        stringBuffer.append(format(10,"用户名"));
-        stringBuffer.append(format(10,"姓名"));
-        stringBuffer.append(format(25,"邮箱"));
-        stringBuffer.append(format(15,"手机号码"));
-        stringBuffer.append(format(10,"预约状态"));
-        System.out.println(stringBuffer);
+        String str = "用户编号" + ("\t") + "用户名" + ("\t\t\t")
+                + "姓名"  + ("\t\t\t\t") + "邮箱"  + ("\t\t\t\t")
+                + "手机号码"  + ("\t\t") + "预约状态";
+        System.out.println(str);
         System.out.println(user);
     }
 
@@ -50,11 +42,11 @@ public class PrintUtil {
         printLine();
         if (null == rooms)
             return;
-        System.out.println("自习室编号" + "自习室名称" + "自习室行数" + "自习室占用情况");
+        String str = "自习室编号" + ("\t") + "自习室名称" + ("\t\t\t")
+                + "自习室行数" + ("\t") + "自习室占用情况";
+        System.out.println(str);
         for (Room room : rooms) {
-            System.out.println(room.getRoomID() + ("\t") + room.getRoomName() + ("\t")
-                    + room.getRoomRow()+ ("\t")
-                    + room.getCurrentOccupancy() + "/" + room.getCapacity());
+            System.out.println(room);
         }
     }
 
@@ -62,10 +54,10 @@ public class PrintUtil {
         printLine();
         if (null == room)
             return;
-        System.out.println("自习室编号" + "自习室名称" + "自习室行数" + "自习室占用情况");
-        System.out.println(room.getRoomID() + ("\t") + room.getRoomName() + ("\t")
-                + room.getRoomRow()+ ("\t")
-                + room.getCurrentOccupancy() + "/" + room.getCapacity());
+        String str = "自习室编号" + ("\t") + "自习室名称" + ("\t\t\t")
+                + "自习室行数" + ("\t") + "自习室占用情况";
+        System.out.println(str);
+        System.out.println(room);
     }
 
     public static void printSeatsIDFormat(List<Seat> seats){
@@ -86,6 +78,9 @@ public class PrintUtil {
     public static void printSeatsFormat(List<Seat> seats){
         if (null == seats)
             return;
+        String str = "座位号" + ("\t") + "房间号" + ("\t")
+                + "房间内座位号" + ("\t") + "座位行"+ ("\t") + "预约状态";
+        System.out.println(str);
         for (Seat seat : seats) {
             System.out.println(seat);
         }
@@ -93,65 +88,37 @@ public class PrintUtil {
     public static void printSeatStatusFormat(List<Seat> seats) {
         if (null == seats)
             return;
+        String str = "座位号" + ("\t") + "房间号" + ("\t")
+                + "房间内座位号" + ("\t") + "座位行"+ ("\t")
+                + "预约状态"+ ("\t") + "座位行"+ ("\t")
+                + "预约状态"+ ("\t") + "座位行"+ ("\t");
+        System.out.println(str);
         StringBuffer stringBuffer;
         for (Seat seat : seats) {
             stringBuffer = new StringBuffer();
-            stringBuffer.append(seat.getSeatID() + ("\t"));
-            stringBuffer.append(seat.getRoomID() + ("\t"));
-            stringBuffer.append(seat.getRoomSeatID() + ("\t"));
-            stringBuffer.append(seat.getSeatRow() + ("\t"));
-            stringBuffer.append(seat.getStatus() + ("\t"));
-            stringBuffer.append(seat.getUserID() + ("\t"));
-            stringBuffer.append(seat.getStartTime() + ("\t"));
-            stringBuffer.append(seat.getEndTime() + ("\t"));
-            stringBuffer.append(seat.getIsConfirmed() + ("\t"));
+            stringBuffer
+                    .append(seat.getSeatID()).append("\t")
+                    .append(seat.getRoomID()).append("\t")
+                    .append(seat.getRoomSeatID()).append("\t")
+                    .append(seat.getSeatRow()).append("\t")
+                    .append(seat.getStatus()).append("\t")
+                    .append(seat.getUserID()).append("\t")
+                    .append(seat.getStartTime()).append("\t")
+                    .append(seat.getEndTime()).append("\t")
+                    .append(seat.getIsConfirmed()).append("\t");
             System.out.println(stringBuffer);
         }
     }
     public static void printReservationsFormat(List<Reservation> reservations){
         if (null == reservations)
             return;
+        String str = "预约号" + ("\t") + "用户编号" + ("\t")
+                + "座位号" + ("\t") + "房间号"+ ("\t")
+                + "开始时间"+ ("\t\t\t\t") + "结束时间"+ ("\t\t\t\t\t")
+                + "签离";
+        System.out.println(str);
         for (Reservation reservation : reservations) {
             System.out.println(reservation);
         }
     }
-
-    public static void printReservationsFormat(Reservation reservation){
-        if (null == reservation)
-            return;
-        System.out.println(reservation);
-    }
-
-    //格式化字符串 对齐
-    public static String format(int length,String string) {
-        int numCount = 0;
-        int zmCount = 0;
-        for (int i = 0; i < string.length(); i++) {
-            char charAt = string.charAt(i);
-            if ((charAt >= '0' && charAt <= '9') || (charAt >= 32 && charAt <= 47) || (charAt >= 58 && charAt <= 64)
-                    || (charAt >= 91 && charAt <= 96) || (charAt >= 123 && charAt <= 127))
-                numCount++;
-            if ((charAt >= 'a' && charAt <= 'z') || (charAt >= 'A' && charAt <= 'Z'))
-                zmCount++;
-        }
-        int formatnum = length - string.length() + numCount + zmCount;
-        String f = "%-" + formatnum + "s";
-        return String.format(f,string);
-    }
-
-    public static int formatnum(int length,String string) {
-        int numCount = 0;
-        int zmCount = 0;
-        for (int i = 0; i < string.length(); i++) {
-            char charAt = string.charAt(i);
-            if ((charAt >= '0' && charAt <= '9') || (charAt >= 32 && charAt <= 47) || (charAt >= 58 && charAt <= 64)
-                    || (charAt >= 91 && charAt <= 96) || (charAt >= 123 && charAt <= 127))
-                numCount++;
-            if ((charAt >= 'a' && charAt <= 'z') || (charAt >= 'A' && charAt <= 'Z'))
-                zmCount++;
-        }
-        return length - string.length() + numCount + zmCount;
-    }
-
-
 }

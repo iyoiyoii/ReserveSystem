@@ -104,10 +104,10 @@ public class Seat {
 
     @Override
     public String toString() {
-        return  SeatID + ("\t")
-                + RoomID + ("\t")
-                + RoomSeatID + ("\t")
-                + SeatRow + ("\t")
-                + Status + ("\t");
+        return  SeatID + ("\t\t")
+                + RoomID + ("\t\t")
+                + RoomSeatID + ("\t\t\t")
+                + SeatRow + ("\t\t")
+                + Status + ("\t\t");
     }
 }
