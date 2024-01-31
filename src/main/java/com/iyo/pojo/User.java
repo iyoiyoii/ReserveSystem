@@ -1,7 +1,5 @@
 package com.iyo.pojo;
 
-import com.iyo.util.PrintUtil;
-
 public class User {
     private int UserID;
     private String UserName;
@@ -83,13 +81,8 @@ public class User {
 
     @Override
     public String toString() {
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(PrintUtil.format(10,String.valueOf(UserID)));
-        stringBuffer.append(PrintUtil.format(16,UserName));
-        stringBuffer.append(PrintUtil.format(16,Name));
-        stringBuffer.append(PrintUtil.format(20,Email));
-        stringBuffer.append(PrintUtil.format(15, String.valueOf(PhoneNumber)));
-        stringBuffer.append(PrintUtil.format(10, String.valueOf(CurrentReservationID)));
-        return stringBuffer.toString();
+        return UserID + ("\t\t") + UserName + ("\t\t")
+                + Name  + ("\t\t\t") + Email  + ("\t\t")
+                + PhoneNumber  + ("\t") + CurrentReservationID;
     }
 }

@@ -1,5 +1,7 @@
 package com.iyo.pojo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Reservation {
@@ -72,14 +74,21 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" +
-                "ReservationID=" + ReservationID +
-                ", UserID=" + UserID +
-                ", SeatID=" + SeatID +
-                ", StartTime=" + StartTime +
-                ", EndTime=" + EndTime +
-                ", IsConfirmed=" + IsConfirmed +
-                ", RoomID=" + RoomID +
-                '}';
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String Start = null;
+        String End;
+        if (null != StartTime) {
+            Start = dateFormat.format(StartTime);
+        }
+        if (null != EndTime) {
+            End = dateFormat.format(EndTime);
+        }else {
+            End = "yyyy-MM-dd HH:mm:ss";
+        }
+
+        return  ReservationID + ("\t\t") + UserID + ("\t\t")
+                + SeatID + ("\t\t") + RoomID+ ("\t\t")
+                + Start + ("\t") + End + ("\t\t")
+                + IsConfirmed;
     }
 }
