@@ -27,6 +27,7 @@ public class UserService {
         return userMapper.queryUserByName(UserName);
     }
     public void getUserAll(){
+        sqlSession.clearCache();
         PrintUtil.printUserFormat(userMapper.getUserAll());
     }
     public void queryUserByWord(){

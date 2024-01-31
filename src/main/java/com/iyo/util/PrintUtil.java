@@ -50,7 +50,7 @@ public class PrintUtil {
         printLine();
         if (null == rooms)
             return;
-        System.out.println("自习室编号" + "自习室名称" + "自习室占用情况");
+        System.out.println("自习室编号" + "自习室名称" + "自习室行数" + "自习室占用情况");
         for (Room room : rooms) {
             System.out.println(room.getRoomID() + ("\t") + room.getRoomName() + ("\t")
                     + room.getRoomRow()+ ("\t")

@@ -31,6 +31,7 @@ public class SeatService {
 
 
     public void getSeatAll(){
+        sqlSession.clearCache();
         PrintUtil.printSeatsFormat(seatMapper.getSeatAll());
     }
     public void getFreeSeat(){
@@ -138,9 +139,9 @@ public class SeatService {
     }
 
     public int getRoomRow(Room room){
-        int max = 0;
+        int max;
         List<Seat> seats = seatMapper.getRoomSeatRowByRoom(room);
-        List<Integer> rows = new ArrayList<Integer>();
+        List<Integer> rows = new ArrayList<>();
         rows.add(0);
         for (Seat seat : seats) {
             rows.add(seat.getSeatRow());

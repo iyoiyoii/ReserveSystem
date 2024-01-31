@@ -105,10 +105,12 @@ public class ReservationService {
     }
 
     public void queryRoomSeat(){
+        sqlSession.clearCache();
         roomService.getRoomSeat();
     }
 
     public void getUserReservations(){
+        sqlSession.clearCache();
         PrintUtil.printReservationsFormat(reservationMapper.getReservationByUserId(SysMain.user.getUserID()));
     }
 }
