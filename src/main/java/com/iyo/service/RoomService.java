@@ -119,6 +119,10 @@ public class RoomService {
             getRoomAll();
             int roomId = InputUtil.readLineInt("请输入要删除的房间号:");
             Room room = roomMapper.getRoomByID(roomId);
+            if(null == room){
+                AdminView.showInformWithLine("你选择的编号有误，请重新选择");
+                break;
+            }
             if (room.getCurrentOccupancy()>0){
                 AdminView.showInformWithLine("要删除的房间仍存在预约，请督促签离后再删除");
                 flag = false;

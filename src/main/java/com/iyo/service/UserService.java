@@ -109,6 +109,10 @@ public class UserService {
             getUserAll();
             int userId = InputUtil.readLineInt("请输入要删除的用户ID:");
             User user = userMapper.queryUserById(userId);
+            if(null == user){
+                AdminView.showInformWithLine("你选择的编号有误，请重新选择");
+                break;
+            }
             if (user.getCurrentReservationID() != 0){
                 AdminView.showInformWithLine("要删除的用户仍存在预约，请督促签离后再删除");
                 flag = false;

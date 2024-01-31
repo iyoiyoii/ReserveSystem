@@ -11,7 +11,7 @@ import com.iyo.view.UserView;
 public class SysMain {
 
     public static User user = new User();
-    public static void main(String[] args) {
+    public static void Start() throws Exception{
         LoginService loginService = new LoginService();
         UserService userService = new UserService();
 
