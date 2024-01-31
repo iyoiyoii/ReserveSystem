@@ -104,10 +104,10 @@ public class RoomService {
         boolean flag = true;
         while (flag){
             Room room = AdminView.addRoomView();
-            if (roomMapper.addRoom(room) > 1)
-                AdminView.showInformWithLine("修改成功");
+            if (roomMapper.addRoom(room) > 0)
+                AdminView.showInformWithLine("添加成功");
             else
-                AdminView.showInformWithLine("修改失败");
+                AdminView.showInformWithLine("添加失败");
             if (AdminView.displayContinue()==2)
                 flag = false;
         }
@@ -118,7 +118,7 @@ public class RoomService {
         while (flag){
             getRoomAll();
             int roomId = InputUtil.readLineInt("请输入要删除的房间号:");
-            if(roomMapper.deleteRoom(roomId) > 1){
+            if(roomMapper.deleteRoom(roomId) > 0){
                 AdminView.showInformWithLine("删除成功");
             }else{
                 AdminView.showInformWithLine("删除失败");

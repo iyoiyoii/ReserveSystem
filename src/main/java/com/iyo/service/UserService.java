@@ -42,7 +42,7 @@ public class UserService {
                 AdminView.showInformWithLine("你选择的编号有误，请重新选择");
                 break;
             }
-            if (userMapper.updateUser(AdminView.displayUserUpdateView(user)) > 1)
+            if (userMapper.updateUser(AdminView.displayUserUpdateView(user)) > 0)
                 AdminView.showInformWithLine("修改成功");
             else
                 AdminView.showInformWithLine("修改失败");
