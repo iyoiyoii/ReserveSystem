@@ -16,7 +16,7 @@ public interface SeatMapper {
     List<Seat> getSeatAll();
     List<Seat> getFreeSeat();
     List<Seat> getRoomSeatRowByRoom(Room room);
-    Seat getSeatFreeByID(int seatId);
+    Seat getSeatOccupiedByID(int seatId);
     int addSeat(Seat seat);
     int deleteSeat(int seatID);
     int updateSeatStatus(@Param("Seat") Seat seat,@Param("Status") int Status);
