@@ -90,8 +90,8 @@ public class PrintUtil {
             return;
         String str = "座位号" + ("\t") + "房间号" + ("\t")
                 + "房间内座位号" + ("\t") + "座位行"+ ("\t")
-                + "预约状态"+ ("\t") + "座位行"+ ("\t")
-                + "预约状态"+ ("\t") + "座位行"+ ("\t");
+                + "用户预约状态"+ ("\t") + "用户编号"+ ("\t")
+                + "开始时间"+ ("\t") + "结束时间"+ ("\t") + "签离";
         System.out.println(str);
         StringBuffer stringBuffer;
         for (Seat seat : seats) {

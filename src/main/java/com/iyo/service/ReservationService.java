@@ -86,13 +86,19 @@ public class ReservationService {
             if (reservationMapper.deleteReservations(reservation) > 0){
                 userMapper.updateUserReservation(SysMain.user,0);
                 Seat seat = seatMapper.getSeatFreeByID(reservation.getSeatID());
-                if (null == seat)
+                if (null == seat){
                     UserView.showInformWithLine("座位不存在或已删除");
+                    flag = false;
+                    break;
+                }
                 else
                     seatMapper.updateSeatStatus(seat,0);
                 Room room = roomMapper.getRoomByID(reservation.getRoomID());
-                if (null == room)
+                if (null == room){
                     UserView.showInformWithLine("房间不存在或已删除");
+                    flag = false;
+                    break;
+                }
                 else
                     roomMapper.updateRoomOccupancy(room,-1);
                 UserView.showInformWithLine("签离成功");
