@@ -3,28 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iyo.mapper.UserMapper">
-    <select id="getUserAll" resultType="com.iyo.pojo.User">
+    <select id="getUserAll" resultType="User">
         select * from user
     </select>
-    <select id="queryUserByWord" resultType="com.iyo.pojo.User" parameterType="string">
+    <select id="queryUserByWord" resultType="User" parameterType="string">
         select * from user where
         concat(ifnull(UserName,''),ifnull(Name,''),ifnull(Email,''),ifnull(PhoneNumber,''))
         like '%${param}%'
     </select>
-    <select id="queryUserById" resultType="com.iyo.pojo.User" parameterType="int">
+    <select id="queryUserById" resultType="User" parameterType="int">
         select * from user where UserId = #{userId}
     </select>
-    <select id="queryUserByName" resultType="com.iyo.pojo.User" parameterType="string">
+    <select id="queryUserByName" resultType="User" parameterType="string">
         select * from user where UserName = #{userName}
     </select>
-    <update id="updateUser" parameterType="com.iyo.pojo.User">
+    <update id="updateUser" parameterType="User">
         update user set UserPassWord=#{UserPassWord},Name=#{Name},Email=#{Email},PhoneNumber=#{PhoneNumber}
         where UserId=#{UserID}
     </update>
     <update id="updateUserReservation">
         update user set CurrentReservationID=#{ReservationID} where UserId= #{User.UserID}
     </update>
-    <insert id="addUser" parameterType="com.iyo.pojo.User">
+    <insert id="addUser" parameterType="User">
         insert into user(UserName,UserPassWord,Name,Email,PhoneNumber)
         values (#{UserName},#{UserPassWord},#{Name},#{Email},#{PhoneNumber})
     </insert>
