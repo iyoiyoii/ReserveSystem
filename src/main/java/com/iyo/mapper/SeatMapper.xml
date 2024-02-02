@@ -3,44 +3,44 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iyo.mapper.SeatMapper">
-    <select id="getSeatByRoomId" resultType="com.iyo.pojo.Seat">
+    <select id="getSeatByRoomId" resultType="Seat">
         select * from seat where RoomID = #{Room.RoomID} and RoomSeatID= #{SeatId}
     </select>
-    <select id="getSeatById" resultType="com.iyo.pojo.Seat">
+    <select id="getSeatById" resultType="Seat">
         select * from seat where SeatID=#{SeatId}
     </select>
-    <select id="getRoomSeat" resultType="com.iyo.pojo.Seat">
+    <select id="getRoomSeat" resultType="Seat">
         select * from seat where RoomID = #{RoomId}
     </select>
-    <select id="getRoomFreeSeat" resultType="com.iyo.pojo.Seat">
+    <select id="getRoomFreeSeat" resultType="Seat">
         select * from seat where RoomID = #{RoomId} and Status=0
     </select>
-    <select id="getRoomSeatRowByIDAndRow" resultType="com.iyo.pojo.Seat">
+    <select id="getRoomSeatRowByIDAndRow" resultType="Seat">
         select * from seat where RoomID=#{RoomID} and SeatRow=#{Row}
     </select>
-    <select id="getSeatStatusAll" resultType="com.iyo.pojo.Seat">
+    <select id="getSeatStatusAll" resultType="Seat">
         select * from seat left join reservations on (reservations.SeatID = seat.SeatID)
     </select>
-    <select id="getSeatAll" resultType="com.iyo.pojo.Seat">
+    <select id="getSeatAll" resultType="Seat">
         select * from seat
     </select>
-    <select id="getFreeSeat" resultType="com.iyo.pojo.Seat">
+    <select id="getFreeSeat" resultType="Seat">
         select * from seat where Status=0
     </select>
-    <select id="getRoomSeatRowByRoom" resultType="com.iyo.pojo.Seat">
+    <select id="getRoomSeatRowByRoom" resultType="Seat">
         select * from seat where Status=0
     </select>
-    <select id="getSeatOccupiedByID" resultType="com.iyo.pojo.Seat">
+    <select id="getSeatOccupiedByID" resultType="Seat">
         select * from seat where Status=1 and SeatID = #{seatID}
     </select>
-    <insert id="addSeat" parameterType="com.iyo.pojo.Room">
+    <insert id="addSeat" parameterType="Room">
         insert into seat(RoomID,RoomSeatID,SeatRow,Status)
         values (#{RoomID},#{RoomSeatID},#{SeatRow},#{Status})
     </insert>
     <delete id="deleteSeat" parameterType="int">
         delete from seat where SeatID = #{seatID}
     </delete>
-    <update id="updateSeatStatus" parameterType="com.iyo.pojo.Room">
+    <update id="updateSeatStatus" parameterType="Room">
         update seat set Status=#{Status} where SeatID=#{Seat.SeatID}
     </update>
 </mapper>
