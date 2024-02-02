@@ -3,17 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iyo.mapper.RoomMapper">
-    <select id="getRoomAll" resultType="com.iyo.pojo.Room">
+    <select id="getRoomAll" resultType="Room">
         select * from room
     </select>
-    <select id="getRoomByID" parameterType="int" resultType="com.iyo.pojo.Room">
+    <select id="getRoomByID" parameterType="int" resultType="Room">
         select * from room where RoomID = #{RoomID}
     </select>
-    <insert id="addRoom" parameterType="com.iyo.pojo.Room">
+    <insert id="addRoom" parameterType="Room">
         insert into room(RoomName,Capacity,CurrentOccupancy,RoomRow)
         values (#{RoomName},#{Capacity},#{CurrentOccupancy},#{RoomRow})
     </insert>
-    <update id="updateRoom" parameterType="com.iyo.pojo.Room">
+    <update id="updateRoom" parameterType="Room">
         update room set RoomName=#{RoomName},Capacity=#{Capacity},
         CurrentOccupancy=#{CurrentOccupancy},RoomRow=#{RoomRow}
         where RoomID=#{RoomID}

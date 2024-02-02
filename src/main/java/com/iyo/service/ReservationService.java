@@ -102,11 +102,11 @@ public class ReservationService {
                 else
                     roomMapper.updateRoomOccupancy(room,-1);
                 UserView.showInformWithLine("签离成功");
-                SysMain.user = userMapper.queryUserById(SysMain.user.getUserID());
                 flag = false;
             }
             else
                 UserView.showInformWithLine("签离失败，请重新选择");
+            SysMain.user = userMapper.queryUserById(SysMain.user.getUserID());
         }
     }
 
